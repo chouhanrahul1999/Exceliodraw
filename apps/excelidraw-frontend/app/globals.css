@@ -1,8 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Virgil&display=swap");
+@font-face {
+  font-family: "Excalidraw";
+  src: url("https://excalidraw.com/Virgil.woff2") format("woff2");
+  font-display: swap;
+}
 @import "tailwindcss";
 @theme {
-  --font-roboto: "Roboto", sans-serif; 
+  --font-roboto: "Roboto", sans-serif;
+  --font-virgil: "Virgil", cursive;
+  --font-excalidraw: "Excalidraw", "Virgil", cursive;
 }
 @theme {
-  --font-display: "Oswald", "sans-serif"; 
+  --font-display: "Oswald", "sans-serif";
+  --color-blue-700: #6965db;
+  --color-blue-900: #0c0969;
 }

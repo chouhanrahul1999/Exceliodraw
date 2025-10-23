@@ -8,14 +8,13 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 export default function Signin() {
-
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const handleSignup: () => Promise<void> = async () => {
+  const handleSignin = async () => {
     setError(null);
     setLoading(true);
     try {
@@ -28,23 +27,27 @@ export default function Signin() {
         return;
       }
 
-      await axios.post("http://localhost:3001/signup", {
+      const res = await axios.post("http://localhost:3001/signin", {
         username,
         password
       });
 
-      router.push("/room");
-
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        router.push("/room");
+      } else {
+        setError("Invalid credentials");
+      }
     } catch (err: any) {
       setError(
         err.response?.data?.message ||
         err.message ||
-        "Signin failes"
-      )
+        "Signin failed"
+      );
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return <div className="flex justify-center items-center min-h-screen bg-gray-100">
     <div className="font-roboto bg-white shadow-2xl rounded-2xl px-8 py-8 w-full max-w-sm flex flex-col gap-4">
@@ -67,7 +70,7 @@ export default function Signin() {
          ref={passwordRef} />
          {error && <div className="text-red-500 text-sm">{error}</div>}
       <div className="pt-4">
-        <Button size="sm" variant="primary" text="Signin" onClick={handleSignup}></Button>
+        <Button size="sm" variant="primary" text="Signin" onClick={handleSignin}></Button>
       </div>
       <BottomWarning label={"Don't have an account?"} buttonText={"Create one"} to={"signup"} />
     </div>

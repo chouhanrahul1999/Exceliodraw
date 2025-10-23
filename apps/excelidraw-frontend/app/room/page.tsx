@@ -19,7 +19,7 @@ export default function RoomPage() {
   const [rooms, setRooms] = useState<Room[]>([]);
   const router = useRouter();
 
-  const getToken = () => localStorage.getItem("token");
+  const getToken = () => `Bearer ${localStorage.getItem("token")}`;
 
   useEffect(() => {
     fetchRooms();
