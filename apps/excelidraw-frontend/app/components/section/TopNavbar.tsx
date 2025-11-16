@@ -22,7 +22,7 @@ export const TopNavbar = () => {
           <div>
             <img src="	https://plus.excalidraw.com/images/logo.svg" alt="" />
           </div>
-          <div className="gap-10 flex text-gray-900 justify-center items-center text-sm font-normal ">
+          <div className="gap-10 flex text-gray-900 justify-center items-center text-sm font-sans                       font-normal ">
             <a href="#">Pricing</a>
             <a href="#">Terms</a>
             <a href="#">Roadmap</a>
