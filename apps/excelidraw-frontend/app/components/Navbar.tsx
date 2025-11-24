@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Pencil } from 'lucide-react';
-import { Button } from '@repo/ui/button';
 import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
@@ -42,7 +41,7 @@ const Navbar = () => {
             <span className="text-xl font-bold text-gray-900">Excelidraw</span>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4">
             <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
             {loggedIn ? (
               <button
@@ -61,6 +60,13 @@ const Navbar = () => {
               </>
             )}
           </div>
+          
+          <button
+            className="md:hidden p-2"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
       </div>
       
@@ -74,13 +80,27 @@ const Navbar = () => {
             >
               Features
             </a>
-            <a 
-              href="#testimonials" 
-              className="block px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Testimonials
-            </a>
+            {loggedIn ? (
+              <button
+                className="block w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+                onClick={() => {
+                  handleSignout();
+                  setIsOpen(false);
+                }}
+              >
+                Signout
+              </button>
+            ) : (
+              <button
+                className="block w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+                onClick={() => {
+                  router.push('/signin');
+                  setIsOpen(false);
+                }}
+              >
+                Signin
+              </button>
+            )}
           </div>
         </div>
       )}

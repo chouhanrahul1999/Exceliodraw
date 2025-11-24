@@ -6,6 +6,7 @@ import { InputBox } from "../components/ui/InputBox";
 import React, { useRef, useState } from 'react';
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { ExButton } from "../components/ui/ExButton";
 
 export default function Signup() {
 
@@ -52,7 +53,7 @@ export default function Signup() {
   return <div className="flex justify-center items-center min-h-screen bg-gray-100">
     <div className="font-roboto bg-white shadow-2xl rounded-2xl px-8 py-8 w-full max-w-sm flex flex-col gap-4">
       <div className="text-center flex flex-col pb-4 items-center ">
-        <div className="shadow-md mb-4 w-10 h-10 bg-gray-900 rounded-xl flex items-center justify-center">
+        <div className="shadow-md mb-4 w-10 h-10 bg-blue-700 rounded-xl flex items-center justify-center">
           <Pencil className="h-5 w-5 text-white" />
         </div>
         <span className="font-semibold text-2xl  text-gray-900">Welcome!</span>
@@ -75,7 +76,7 @@ export default function Signup() {
          ref={passwordRef} />
          {error && <div className="text-red-500 text-sm">{error}</div>}
       <div className="pt-4">
-        <Button size="sm" variant="primary" text="Signup" onClick={handleSignup}></Button>
+        <ExButton size="xl" variant="primary" text="Signup" onClick={handleSignup}/>
       </div>
       <BottomWarning label={"You have an account?"} buttonText={"Sign in"} to={"signin"} />
     </div>

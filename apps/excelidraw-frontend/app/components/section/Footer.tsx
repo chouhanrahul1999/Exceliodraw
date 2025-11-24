@@ -6,7 +6,7 @@ import { FaInstagram } from "react-icons/fa6";
 export const Footer = () => {
   return (
     <footer>
-      <div className="bg-[url(https://png.pngtree.com/background/20210716/original/pngtree-seamless-pattern-cosmic-objects-set-hand-drawn-vector-doodles-rockets-planets-picture-image_1397364.jpg)] bg-cover bg-center relative">
+      <div className="bg-[url(https://as2.ftcdn.net/v2/jpg/05/19/73/39/1000_F_519733913_rsuvNKC76m4RWgKwrQz8sOteM8HpnAT5.jpg)] bg-cover bg-center relative">
         <div className="absolute inset-0 bg-gray-950 opacity-60"></div>
         <div className="h-fit flex justify-between relative z-10">
           <div className="p-24">

@@ -154,4 +154,30 @@ app.get("/room/:slug", async (req, res) => {
   });
 });
 
+app.delete("/room/:roomId", middleware, async (req, res) => {
+  try {
+    // @ts-ignore
+    const userId = req.userId;
+    const roomId = Number(req.params.roomId);
+
+    const room = await prismaClient.room.findFirst({
+      where: { id: roomId, adminId: userId },
+    });
+
+    if (!room) {
+      res.status(403).json({ message: "Unauthorized" });
+      return;
+    }
+
+    await prismaClient.room.delete({
+      where: { id: roomId },
+    });
+
+    res.json({ message: "Room deleted successfully" });
+  } catch (e) {
+    console.error("Delete error:", e);
+    res.status(411).json({ message: "Failed to delete room" });
+  }
+});
+
 app.listen(3001);

@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 interface ButtonProps {
-  size: "sm" | "lg" | "md";
+  size: "sm" | "lg" | "md" | "xl";
   variant: "primary" | "secondary";
   startIcon?: ReactElement;
   endIcon?: ReactElement;
@@ -18,6 +18,7 @@ const size = {
   sm: "w-fit font-medium text-xs justify-center py-3 px-6 rounded-4xl",
   md: "w-fit font-medium text-sm justify-center py-3 px-6 rounded-4xl",
   lg: "w-fit font-medium text-sm justify-center py-3 px-12 rounded-4xl",
+  xl: "w-full font-medium text-sm justify-center py-3  rounded-4xl",
 };
 
 export const ExButton = (props: ButtonProps) => {

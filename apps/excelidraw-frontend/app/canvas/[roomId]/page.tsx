@@ -7,7 +7,9 @@ export default async function CanvasPage({ params }: {
 }) {
   const roomId = (await params).roomId;
 
-  console.log(roomId);
-
-  return <RoomCanvas roomId={roomId} />
+  return (
+    <div className="w-screen h-screen overflow-hidden">
+      <RoomCanvas roomId={roomId} />
+    </div>
+  )
 }

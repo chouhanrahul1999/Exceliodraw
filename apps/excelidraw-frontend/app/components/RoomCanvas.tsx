@@ -3,33 +3,44 @@
 import { useEffect, useState } from "react";
 import { WS_URL } from "@/config";
 import { Canvas } from "./Canvas";
+import { useAuth } from "@/app/contexts/AuthContext";
 
 export function RoomCanvas({ roomId }: { roomId: string }) {
-  
   const [socket, setSocket] = useState<WebSocket | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const { token, user } = useAuth();
 
   useEffect(() => {
-    const ws = new WebSocket(`${WS_URL}?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlOGRiYTg3YS05ZWUwLTQyZGUtODVkMS1iNjBkMmVkNDhmNWUiLCJpYXQiOjE3NDcyMjYwNDB9.oaQ-U_qkrZeOzOW_BdP4TJm20MB8N9ZN3x5DN7RbHJ0`);
-
-    ws.onopen = () => {
-      setSocket(ws);
-      ws.send(JSON.stringify({
-        type: "join_room",
-        roomId
-      }))
-    };
+    setMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
 
-  if (!socket) {
-    return <div>
-      connecting to server...
-    </div>
+    const ws = new WebSocket(`${WS_URL}?token=${token}`);
+
+    ws.onopen = () => {
+      ws.send(
+        JSON.stringify({
+          type: "join_room",
+          roomId,
+        })
+      );
+      setSocket(ws);
+    };
+
+    return () => {
+      ws.close();
+    };
+  }, [token, roomId]);
+
+  if (!mounted || !token) {
+    return <div>Please sign in to collaborate</div>;
   }
 
   return (
-    <div>
-      <Canvas roomId={roomId} socket={socket} />
-    </div>
+      <Canvas roomId={roomId} socket={socket} user={user} />
   );
 }
